@@ -5,7 +5,7 @@ const interval = setInterval(function () {
   timer--;
   if (timer === -1) {
     clearInterval(interval);
-    location.href = "#/copywriting";
+    location.href = "/copywriting";
   }
 }, 1000);
 window.addEventListener(

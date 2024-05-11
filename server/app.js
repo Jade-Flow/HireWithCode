@@ -24,6 +24,9 @@ app.all("*", function (req, res, next) {
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "./static/index.html"));
 });
+app.get("/copywriting", function (req, res) {
+  res.sendFile(path.join(__dirname, "./static/pages/copyWritingCopy.html"));
+});
 app.use("/copywriting", copywritingRouter);
 app.use("/acceptChallenge", accpteChallenge);
 app.use("/finished", finishedRouter);
