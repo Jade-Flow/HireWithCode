@@ -19,7 +19,7 @@ window.addEventListener(
           method: "GET",
           success: function (copyWritingData) {
             $.ajax({
-              url: "./src/copywritingCopy.html",
+              url: "./pages/copywritingCopy.html",
               method: "GET",
               dataType: "html",
               success: function (data) {
@@ -33,7 +33,7 @@ window.addEventListener(
         break;
       case "/accept":
         $.ajax({
-          url: "./src/accept.html",
+          url: "./pages/accept.html",
           method: "GET",
           dataType: "html",
           success: function (data) {
@@ -43,7 +43,7 @@ window.addEventListener(
         break;
       case "/finished":
         $.ajax({
-          url: "./src/finished.html",
+          url: "./pages/finished.html",
           method: "GET",
           dataType: "html",
           success: function (data) {
@@ -83,7 +83,7 @@ function acceptHandle(e) {
         $(e).attr("disabled", false);
         $(e).html("提交成功");
         $.ajax({
-          url: "../components/tip.html",
+          url: "./pages/components/tip.html",
           method: "GET",
           dataType: "html",
           success: function (tipDom) {
@@ -136,7 +136,7 @@ function finishedHandle(e) {
         $(e).attr("disabled", false);
         $(e).html("挑战成功");
         $.ajax({
-          url: "../components/tip.html",
+          url: "./pages/components/tip.html",
           method: "GET",
           dataType: "html",
           success: function (tipDom) {
