@@ -19,7 +19,7 @@ window.addEventListener(
           method: "GET",
           success: function (copyWritingData) {
             $.ajax({
-              url: "./pages/copywritingCopy.html",
+              url: "./src/copywritingCopy.html",
               method: "GET",
               dataType: "html",
               success: function (data) {
@@ -33,7 +33,7 @@ window.addEventListener(
         break;
       case "/accept":
         $.ajax({
-          url: "./pages/accept.html",
+          url: "./src/accept.html",
           method: "GET",
           dataType: "html",
           success: function (data) {
@@ -43,7 +43,7 @@ window.addEventListener(
         break;
       case "/finished":
         $.ajax({
-          url: "./pages/finished.html",
+          url: "./src/finished.html",
           method: "GET",
           dataType: "html",
           success: function (data) {
