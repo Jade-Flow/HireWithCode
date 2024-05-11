@@ -27,7 +27,7 @@ app.use("/acceptChallenge", accpteChallenge);
 app.use("/finished", finishedRouter);
 // express配置跨域
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "../index.html"));
+  res.sendFile(path.join(__dirname, "../static/index.html"));
 });
 app.use(express.static(path.resolve(__dirname, "../static")));
 app.listen(3300);
