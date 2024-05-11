@@ -3,6 +3,7 @@ const app = express();
 const copywritingRouter = require("./routers/getCopywriting");
 const accpteChallenge = require("./routers/acceptChalllenge");
 const finishedRouter = require("./routers/finished");
+const path = require("path");
 app.all("*", function (req, res, next) {
   // 设置请求头为允许跨域
   res.header("Access-Control-Allow-Origin", "*");
