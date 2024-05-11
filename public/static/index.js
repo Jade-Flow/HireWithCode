@@ -83,7 +83,7 @@ function acceptHandle(e) {
         $(e).attr("disabled", false);
         $(e).html("提交成功");
         $.ajax({
-          url: "./pages/components/tip.html",
+          url: "./components/tip.html",
           method: "GET",
           dataType: "html",
           success: function (tipDom) {
@@ -136,7 +136,7 @@ function finishedHandle(e) {
         $(e).attr("disabled", false);
         $(e).html("挑战成功");
         $.ajax({
-          url: "./pages/components/tip.html",
+          url: "./components/tip.html",
           method: "GET",
           dataType: "html",
           success: function (tipDom) {

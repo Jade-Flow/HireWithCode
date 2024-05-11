@@ -3,6 +3,8 @@ const app = express();
 const copywritingRouter = require("./routers/getCopywriting");
 const accpteChallenge = require("./routers/acceptChalllenge");
 const finishedRouter = require("./routers/finished");
+const fs = require("fs");
+const path = require("path");
 app.all("*", function (req, res, next) {
   // 设置请求头为允许跨域
   res.header("Access-Control-Allow-Origin", "*");
@@ -20,12 +22,12 @@ app.all("*", function (req, res, next) {
   }
 });
 
-app.get("/", function (req, res) {
-  res.send("Hello World");
-});
 app.use("/copywriting", copywritingRouter);
 app.use("/acceptChallenge", accpteChallenge);
 app.use("/finished", finishedRouter);
 // express配置跨域
-
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "../index.html"));
+});
+app.use(express.static(path.resolve(__dirname, "../static")));
 app.listen(3300);
