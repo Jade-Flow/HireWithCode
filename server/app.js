@@ -21,11 +21,11 @@ app.all("*", function (req, res, next) {
 });
 
 app.get("/", function (req, res) {
-  res.send("Hello World111111");
+  res.sendFile(path.join(__dirname, "./static/index.html"));
 });
 app.use("/copywriting", copywritingRouter);
 app.use("/acceptChallenge", accpteChallenge);
 app.use("/finished", finishedRouter);
-// express配置跨域
 
+app.use(express.static(path.resolve(__dirname, "./static")));
 app.listen(3300);
