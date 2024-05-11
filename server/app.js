@@ -27,6 +27,12 @@ app.get("/", function (req, res) {
 app.get("/copywriting", function (req, res) {
   res.sendFile(path.join(__dirname, "./static/pages/copyWritingCopy.html"));
 });
+app.get("/accept", function (req, res) {
+  res.sendFile(path.join(__dirname, "./static/pages/accept.html"));
+});
+app.get("/finished", function (req, res) {
+  res.sendFile(path.join(__dirname, "./static/pages/finished.html"));
+});
 app.use("/copywriting", copywritingRouter);
 app.use("/acceptChallenge", accpteChallenge);
 app.use("/finished", finishedRouter);
