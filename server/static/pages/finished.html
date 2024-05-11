@@ -104,7 +104,19 @@
       .handle-button:active {
         box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
       }
+      .handle-block {
+        display: flex;
+        justify-content: center;
+      }
+      .handle-block > button {
+        margin-right: 20px;
+      }
     </style>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div class="container">
@@ -135,13 +147,18 @@
               />
             </div>
           </form>
-          <button
-            onclick="finishedHandle(this)"
-            id="accept-handle"
-            class="handle-button"
-          >
-            完 成 挑 战
-          </button>
+          <div class="handle-block">
+            <button onclick="goBack()" id="accept-handle" class="handle-button">
+              返 回
+            </button>
+            <button
+              onclick="finishedHandle(this)"
+              id="accept-handle"
+              class="handle-button"
+            >
+              完 成 挑 战
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -151,20 +168,21 @@
           $(e).removeClass("required");
         }
       }
+      function goBack() {
+        window.location.href = "/accept";
+      }
       function finishedHandle(e) {
         $(e).attr("disabled", true);
         $(e).html("提交中...");
         const data = {};
-        const requiredResult = Array.from($("#finished-form")[0]).every(
-          (item) => {
-            if (!$(item).val()) {
-              $(item).addClass("required");
-              return false;
-            }
-            data[$(item).attr("name")] = $(item).val();
-            return true;
+        let requiredResult = true;
+        Array.from($("#finished-form")[0]).map((item) => {
+          if (!$(item).val()) {
+            $(item).addClass("required");
+            requiredResult = false;
           }
-        );
+          data[$(item).attr("name")] = $(item).val();
+        });
         if (requiredResult) {
           $.ajax({
             url: "http://127.0.0.1:3300/finished/postForm",
@@ -195,6 +213,9 @@
               });
             },
           });
+        } else {
+          $(e).attr("disabled", false);
+          $(e).html("完成挑战");
         }
       }
     </script>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>接受挑战</title>
+
     <style>
       .container {
         height: 100vh;
@@ -104,7 +105,19 @@
       .handle-button:active {
         box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
       }
+      .handle-block {
+        display: flex;
+        justify-content: center;
+      }
+      .handle-block > button {
+        margin-right: 20px;
+      }
     </style>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div class="container">
@@ -136,32 +149,38 @@
               <span class="required-tip">请输入正确的邮箱地址</span>
             </div>
           </form>
-          <button
-            onclick="acceptHandle(this)"
-            id="accept-handle"
-            class="handle-button"
-          >
-            接 受 挑 战
-          </button>
+          <div class="handle-block">
+            <button onclick="goBack()" id="accept-handle" class="handle-button">
+              返 回
+            </button>
+            <button
+              onclick="acceptHandle(this)"
+              id="accept-handle"
+              class="handle-button"
+            >
+              接 受 挑 战
+            </button>
+          </div>
         </div>
       </div>
     </div>
     <script>
+      function goBack() {
+        window.location.href = "/copywriting";
+      }
       function acceptHandle(e) {
         $(e).attr("disabled", true);
         $(e).html("提交中...");
 
         const data = {};
-        const requiredResult = Array.from($("#accept-form")[0]).every(
-          (item) => {
-            if (!$(item).val()) {
-              $(item).addClass("required");
-              return false;
-            }
-            data[$(item).attr("name")] = $(item).val();
-            return true;
+        let requiredResult = true;
+        Array.from($("#accept-form")[0]).map((item) => {
+          if (!$(item).val()) {
+            $(item).addClass("required");
+            requiredResult = false;
           }
-        );
+          data[$(item).attr("name")] = $(item).val();
+        });
         if (requiredResult) {
           $.ajax({
             url: "http://127.0.0.1:3300/acceptChallenge/postForm",
@@ -169,6 +188,7 @@
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (data) {
+              requiredResult = true;
               $(e).attr("disabled", false);
               $(e).html("提交成功");
               $.ajax({
@@ -185,7 +205,7 @@
                     $(".globl-tip").addClass("error");
                     message = `
                   <span>${message}</span>
-                  <a href="#/finished">点击跳转到挑战页面</a>
+                  <a href="/finished">点击跳转到挑战页面</a>
                 `;
                   }
                   $(".globl-tip").html(message);
@@ -193,13 +213,16 @@
                   const timer = setTimeout(() => {
                     $(".globl-tip").hide();
                     if (data.code === 200) {
-                      window.location.href = "#/finished";
+                      window.location.href = "/finished";
                     }
                   }, 3000);
                 },
               });
             },
           });
+        } else {
+          $(e).attr("disabled", false);
+          $(e).html("接受挑战");
         }
       }
       function inputChange(e) {
