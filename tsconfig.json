@@ -16,7 +16,11 @@
     "noEmit": true,
     "jsx": "preserve",
     "jsxImportSource": "vue",
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "baseUrl": ".", // Add baseUrl
+    "paths": {
+      "@/*": ["src/*"] // Add paths mapping
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
