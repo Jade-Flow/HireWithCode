@@ -1,7 +1,7 @@
 <template>
   <div class="guidance-page container mx-auto p-4">
     <MarkdownContent />
-    <div class="flex justify-center"><el-button @click="handleAccept">接受挑战</el-button></div>
+    <div class="flex justify-center"><el-button @click="handleAccept">下一步</el-button></div>
   </div>
 </template>
 

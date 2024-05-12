@@ -1,23 +1,35 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '@/App.vue'
+import Welcome from '@/views/Welcome.vue'
 import Guidance from '@/views/Guidance.vue'
 import Challenge from '@/views/Challenge.vue'
+import Finish from '@/views/Finish.vue'
+import End from '@/views/End.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'welcome',
+    component: Welcome,
   },
   {
     path: '/guidance',
-    name: 'Guidance',
+    name: 'guidance',
     component: Guidance,
   },
   {
     path: '/challenge',
-    name: 'Challenge',
+    name: 'challenge',
     component: Challenge,
+  },
+  {
+    path: '/finish',
+    name: 'finish',
+    component: Finish,
+  },
+  {
+    path: '/end',
+    name: 'end',
+    component: End,
   },
 ]
 

@@ -9,3 +9,7 @@
 .centered-row {
   @apply flex items-center justify-center;
 }
+
+.full-size {
+  @apply w-full h-full;
+}

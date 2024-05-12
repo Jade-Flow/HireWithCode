@@ -1,14 +1,14 @@
 <template>
   <div class="centered-col">
     <el-form :model="form" label-width="auto" style="max-width: 600px">
-      <el-form-item label="Github Id">
-        <el-input placeholder="请输入Github Id" v-model="form.id" />
+      <el-form-item label="github 仓库 url">
+        <el-input placeholder="请输入github 仓库 url" v-model="form.github" />
       </el-form-item>
-      <el-form-item label="邮箱">
-        <el-input placeholder="请输入邮箱" v-model="form.email" />
+      <el-form-item label="Vercel在线体验地址">
+        <el-input placeholder="Vercel在线体验地址" v-model="form.vercel" />
       </el-form-item>
     </el-form>
-    <el-button @click="handleAccept"> 接受挑战 </el-button>
+    <el-button @click="handleAccept"> 提交作品 </el-button>
   </div>
 </template>
 
@@ -18,8 +18,8 @@ import { supabase } from '@/api'
 import router from '@/router'
 
 const form = reactive({
-  id: '',
-  email: '',
+  github: '',
+  vercel: '',
 })
 
 const handleAccept = async () => {
@@ -28,14 +28,13 @@ const handleAccept = async () => {
 }
 
 const addRow = async () => {
-  const { data, error } = await supabase.from('accept').insert([
+  const { github, vercel } = form
+  const { data, error } = await supabase.from('finish').insert([
     {
-      form: {
-        id: form.id,
-        email: form.email,
-      },
+      github,
+      vercel,
     },
   ])
-  router.push('/finish')
+  router.push('end')
 }
 </script>
