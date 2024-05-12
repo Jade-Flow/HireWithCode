@@ -1,6 +1,4 @@
-import { defineConfig } from 'eslint-define-config'
-
-export default defineConfig({
+module.exports = {
   env: {
     browser: true,
     es2021: true,
@@ -10,7 +8,7 @@ export default defineConfig({
     'eslint:recommended',
     'plugin:vue/vue3-recommended',
     'plugin:@typescript-eslint/recommended',
-    'airbnb-base', // Choose your preferred style guide
+    'airbnb-base', // Replace with your preferred style guide if necessary
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -24,15 +22,15 @@ export default defineConfig({
     '@typescript-eslint',
   ],
   rules: {
-    'no-unused-vars': 'off', // Disable the base rule
+    'no-unused-vars': 'off', // Disable base rule
     '@typescript-eslint/no-unused-vars': ['warn'],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'vue/multi-word-component-names': 'off',
-    // Add any additional rules here
+    'vue/multi-word-component-names': 'off', // Allows single-word component names
+    // Additional custom rules can be added here
   },
   settings: {
     'import/resolver': {
-      typescript: {}, // Resolve TypeScript paths
+      typescript: {}, // Resolves TypeScript paths
     },
   },
-})
+}
