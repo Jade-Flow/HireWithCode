@@ -10,6 +10,6 @@ import MarkdownContent from '@/assets/instruction.md'
 import router from '@/router'
 
 const handleAccept = () => {
-  router.push('/challenge')
+  router.push('challenge')
 }
 </script>

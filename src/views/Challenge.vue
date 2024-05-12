@@ -8,7 +8,7 @@
         <el-input placeholder="请输入邮箱" v-model="form.email" />
       </el-form-item>
     </el-form>
-    <el-button @click="handleAccept"> 接受挑战 </el-button>
+    <el-button @click="handleAccept" :loading="onLoading"> 接受挑战 </el-button>
   </div>
 </template>
 
@@ -17,17 +17,18 @@ import { reactive, ref } from 'vue'
 import { supabase } from '@/api'
 import router from '@/router'
 
+const onLoading = ref(false)
 const form = reactive({
   id: '',
   email: '',
 })
 
 const handleAccept = async () => {
-  // const { data, error } = await supabase.from('accept').select('*')
   addRow()
 }
 
 const addRow = async () => {
+  onLoading.value = true
   const { data, error } = await supabase.from('accept').insert([
     {
       form: {
@@ -36,6 +37,7 @@ const addRow = async () => {
       },
     },
   ])
-  router.push('/finish')
+  onLoading.value = false
+  router.push('finish')
 }
 </script>

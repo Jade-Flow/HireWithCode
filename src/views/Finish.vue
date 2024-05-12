@@ -8,7 +8,7 @@
         <el-input placeholder="Vercel在线体验地址" v-model="form.vercel" />
       </el-form-item>
     </el-form>
-    <el-button @click="handleAccept"> 提交作品 </el-button>
+    <el-button @click="handleAccept" :loading="onLoading"> 提交作品 </el-button>
   </div>
 </template>
 
@@ -17,17 +17,18 @@ import { reactive, ref } from 'vue'
 import { supabase } from '@/api'
 import router from '@/router'
 
+const onLoading = ref(false)
 const form = reactive({
   github: '',
   vercel: '',
 })
 
 const handleAccept = async () => {
-  // const { data, error } = await supabase.from('accept').select('*')
   addRow()
 }
 
 const addRow = async () => {
+  onLoading.value = true
   const { github, vercel } = form
   const { data, error } = await supabase.from('finish').insert([
     {
@@ -35,6 +36,7 @@ const addRow = async () => {
       vercel,
     },
   ])
+  onLoading.value = false
   router.push('end')
 }
 </script>
