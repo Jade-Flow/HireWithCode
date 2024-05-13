@@ -12,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
             msg: "MarkDown"
         },
-        component: () => import("../components/welcome.vue")
+        component: () => import("../components/md.vue")
     },{
         path: '/start',
         meta: {
