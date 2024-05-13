@@ -24,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
             msg: "结束挑战"
         },
-        component: () => import("../components/welcome.vue")
+        component: () => import("../components/end.vue")
     },
 ]
 
