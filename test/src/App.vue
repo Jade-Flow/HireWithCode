@@ -7,6 +7,7 @@ import { markRaw, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import welcomeVue from "./components/welcome.vue";
 import mdVue from "./components/md.vue";
+import startVue from "./components/start.vue";
 
 const currentComponent: any = ref(null)
 const route = useRoute();
@@ -16,6 +17,8 @@ const updateCurrentComponent = () => {
     currentComponent.value = markRaw(welcomeVue)
   } else if (route.path === '/md') {
     currentComponent.value = markRaw(mdVue)
+  } else if (route.path === '/start') {
+    currentComponent.value = markRaw(startVue)
   }
 }
 updateCurrentComponent
