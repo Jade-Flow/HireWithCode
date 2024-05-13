@@ -18,7 +18,7 @@ const countdown: Ref<number> = ref(3)
 const route = useRouter()
 
 onMounted(() => {
-    const timer: number = setInterval(() => {
+    const timer: NodeJS.Timeout = setInterval(() => {
         countdown.value -= 1
         ellipsis.value = ellipsis.value.slice(0, ellipsis.value.length - 3)
         if (countdown.value == 0) {
