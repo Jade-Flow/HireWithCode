@@ -1,0 +1,18 @@
+{
+  "name": "hirewithcode",
+  "version": "1.0.0",
+  "description": "欢迎来到 `HireWithCode` 项目！这是一个专为技术面试者设计的真实项目挑战。目前，这个仓库刚刚起步，没有任何代码——只有待实现的功能（TODOs）。你的任务是将这些TODOs转变为实际的代码，提交你的Pull Request（PR）就是你面试的一部分挑战。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.43.1",
+    "connect-multiparty": "^2.2.0",
+    "express": "^4.19.2",
+    "marked": "^12.0.2"
+  }
+}

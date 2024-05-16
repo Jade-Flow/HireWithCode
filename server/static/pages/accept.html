@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>接受挑战</title>
+
+    <style>
+      .container {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .contetn-container {
+        height: 330px;
+        width: 380px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        background-color: #ebecf0;
+        padding: 20px;
+      }
+      .title {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 20px;
+        text-align: center;
+      }
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+      }
+      .form-item {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+      .form-item > label {
+        display: inline-block;
+        width: 90px;
+        min-width: 90px;
+        text-align: left;
+      }
+      button,
+      input {
+        border: 0;
+        outline: 0;
+        font-size: 16px;
+        border-radius: 20px;
+        padding: 16px;
+        background-color: #ebecf0;
+        text-shadow: 1px 1px 0 #fff;
+      }
+      input:focus {
+        box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+      }
+      .form-item > input {
+        box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+        width: 100%;
+        box-sizing: border-box;
+        transition: all 0.2s ease-in-out;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+      .form-item > .required {
+        box-shadow: inset 2px 2px 5px rgb(243, 0, 3),
+          inset -2px -2px 10px #ff2326;
+      }
+      .form-item > .required::placeholder {
+        color: #ff2326;
+      }
+      .form-item > .required-tip {
+        position: absolute;
+        left: 100px;
+        top: 55px;
+        color: #ff2326;
+        font-size: 12px;
+        font-weight: bold;
+        display: none;
+      }
+      /* .form-item > input:hover {
+      border-radius: 3px;
+      padding: 8px 5px;
+    } *
+    /* .form-item > input:focus-visible {
+      border: 1px solid #ccc;
+      outline: none;
+    } */
+      .handle-button {
+        color: #61677c;
+        font-weight: bold;
+        box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        font-weight: 600;
+        align-self: center;
+        margin-top: 20px;
+      }
+      .handle-button:hover {
+        box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
+      }
+      .handle-button:active {
+        box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+      }
+      .handle-block {
+        display: flex;
+        justify-content: center;
+      }
+      .handle-block > button {
+        margin-right: 20px;
+      }
+    </style>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="contetn-container">
+        <p class="title">接受挑战</p>
+        <div class="form-container">
+          <form id="accept-form">
+            <div class="form-item">
+              <label for="user_id">GithubId：</label>
+              <input
+                type="text"
+                id="githubId"
+                name="user_id"
+                placeholder="请输入您的GithubId"
+                required
+                onchange="inputChange(this)"
+              />
+            </div>
+            <div class="form-item">
+              <label for="email">Email：</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="请输入您的邮箱地址"
+                required
+                onchange="emailChange(this)"
+              />
+              <span class="required-tip">请输入正确的邮箱地址</span>
+            </div>
+          </form>
+          <div class="handle-block">
+            <button onclick="goBack()" id="accept-handle" class="handle-button">
+              返 回
+            </button>
+            <button
+              onclick="acceptHandle(this)"
+              id="accept-handle"
+              class="handle-button"
+            >
+              接 受 挑 战
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function goBack() {
+        window.location.href = "/copywriting";
+      }
+      function acceptHandle(e) {
+        $(e).attr("disabled", true);
+        $(e).html("提交中...");
+
+        const data = {};
+        let requiredResult = true;
+        Array.from($("#accept-form")[0]).map((item) => {
+          if (!$(item).val()) {
+            $(item).addClass("required");
+            requiredResult = false;
+          }
+          data[$(item).attr("name")] = $(item).val();
+        });
+        if (requiredResult) {
+          $.ajax({
+            url: "https://hire-with-code-weld.vercel.app/acceptChallenge/postForm",
+            method: "POST",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (data) {
+              requiredResult = true;
+              $(e).attr("disabled", false);
+              $(e).html("提交成功");
+              $.ajax({
+                url: "./components/tip.html",
+                method: "GET",
+                dataType: "html",
+                success: function (tipDom) {
+                  $("body").append(tipDom);
+                  let message = data.message;
+                  if (data.code === 200) {
+                    $(".globl-tip").addClass("success");
+                    message += "，提交成功,3秒后自动跳转到完成挑战页";
+                  } else if (data.code === 201) {
+                    $(".globl-tip").addClass("error");
+                    message = `
+                  <span>${message}</span>
+                  <a href="/finished">点击跳转到挑战页面</a>
+                `;
+                  }
+                  $(".globl-tip").html(message);
+                  $(".globl-tip").show();
+                  const timer = setTimeout(() => {
+                    $(".globl-tip").hide();
+                    if (data.code === 200) {
+                      window.location.href = "/finished";
+                    }
+                  }, 3000);
+                },
+              });
+            },
+          });
+        } else {
+          $(e).attr("disabled", false);
+          $(e).html("接受挑战");
+        }
+      }
+      function inputChange(e) {
+        if ($(e).val()) {
+          $(e).removeClass("required");
+        }
+      }
+      function emailChange(e) {
+        const val = $(e).val();
+        const reg =
+          /^[A-Za-z0-9-_\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+        if (val) {
+          if (reg.test(val)) {
+            $(e).removeClass("required");
+            $(".required-tip").hide();
+          } else {
+            $(".required-tip").show();
+            $(e).addClass("required");
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

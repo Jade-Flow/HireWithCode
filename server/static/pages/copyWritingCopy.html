@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>面试引导</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      .container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .handle-button {
+        height: 39px;
+        line-height: 39px;
+        width: 120px;
+        border-radius: 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+        align-self: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="copywriting"></div>
+      <button onclick="handleClick()" class="handle-button">继 续</button>
+    </div>
+    <script>
+      $.ajax({
+        url: "https://hire-with-code-weld.vercel.app/copywriting/index",
+        method: "GET",
+        success: function (copyWritingData) {
+          $(".copywriting").html(copyWritingData);
+        },
+      });
+      function handleClick() {
+        location.href = "/accept";
+      }
+    </script>
+  </body>
+</html>
