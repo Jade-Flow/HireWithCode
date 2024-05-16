@@ -5,7 +5,7 @@ const fs = require("fs");
 const marked = require("marked");
 router.get("/index", (req, res) => {
   fs.readFile(
-    path.join(__dirname, "../static/copywriting.md"),
+    path.join(__dirname, "../static/COPYWRITING.md"),
     "utf8",
     (err, data) => {
       if (err) {
